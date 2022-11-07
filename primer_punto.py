@@ -5,14 +5,12 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-url = 'https://catfact.ninja/facts'
-response = requests.get(url)
+URL = 'https://catfact.ninja/facts'
+response = requests.get(URL)
 data = response.json()
 
 results = data["data"]
-cat_list = []
-for i in results:
-    cat_list.append(i["fact"])
+cat_list = [i["fact"] for i in results]
 
 print(cat_list)
 
