@@ -1,0 +1,19 @@
+git stash:
+Almacena temporalmente los cambios sin necesidad de hacer commit.
+
+git add .:
+Agrega el contenido de los cambios al index.
+
+pdflatex:
+convierte archivos latex en pdf. 
+
+kill -HUP 55455:
+
+service vsftpd restart:
+Re-inicia el servicio de vsftpd
+
+nano:
+crea un archivo nuevo.
+
+yum install nginx:
+Comando para installar nginx en linux.
