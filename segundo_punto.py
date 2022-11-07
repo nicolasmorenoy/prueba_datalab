@@ -9,7 +9,7 @@ app = Flask(__name__)
 def proyecto(id_proyecto):
     database = sqlite3.connect("./sitio.db")
     cursor = database.cursor()
-    cursor.execute("SELECT project_name FROM project WHERE id LIKE '%'+?+'%'", id_proyecto)
+    cursor.execute("SELECT project_name FROM project WHERE id LIKE ?", f"%{id_proyecto}%")
     projects = cursor.fetchall()
     proyectos = [i[0] for i in projects]
     print(proyectos)
