@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
 
-import sqlite3
+import sqlite3, json
 
 app = Flask(__name__)
 
@@ -9,18 +9,24 @@ app = Flask(__name__)
 def proyecto(id_proyecto):
     database = sqlite3.connect("./sitio.db")
     cursor = database.cursor()
-    cursor.execute("SELECT project_name FROM project WHERE id LIKE ?", f"%{id_proyecto}%")
+    #cursor.execute("SELECT project_name FROM project WHERE id LIKE ?", (f"%{id_proyecto}%",))
+    cursor.execute("SELECT * FROM project WHERE project_name LIKE ?", (f"%{id_proyecto}%",))
+
     projects = cursor.fetchall()
-    proyectos = [i[0] for i in projects]
+    proyectos = [i for i in projects]
+    proyectos = json.dump(proyectos)
+    #proyectos = str(proyectos)
     print(proyectos)
     cursor.execute("SELECT user.id, user.username, user.password, user.profile_picture, user.user_full_name, role.id, role.name, role.description from user JOIN user_role_association_table ON user.id = user_role_association_table.user_id JOIN role ON user_role_association_table.role_id = role.id")
+    #cursor.execute("SELECT * from user JOIN user_role_association_table ON user.id = user_role_association_table.user_id JOIN role ON user_role_association_table.role_id = role.id")
     query= cursor.fetchall()
     usuarios = [i for i in query]
+    usuarios = str(usuarios)
     
-    resultado_dict = {"proyectos": proyectos, "usuarios": usuarios}
+    resultado_dict = {"proyectos": proyectos, "usuarios": usuarios,}
     
-
-    return render_template("proyecto.html", resultado_dict = resultado_dict)
+    return jsonify(resultado_dict)
+    #return render_template("proyecto.html", resultado_dict = resultado_dict)
 
 
 if __name__ == '__main__':
