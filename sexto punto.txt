@@ -1,0 +1,15 @@
+Para realizar esta tarea vamos a escribir dos funciones:
+onOpen: Función nativa que se ejecuta al abrir el documento, en esta función crearíamos el atajo dentro del menú superior para poder usar nuestro código y haríamos el llamado a la función de insertar imagen.
+insertImage: 
+    -Recibe el parámetro del id de la imagen en nuestro google drive
+    -Creamos una constante para referirnos a nuestro documento activo. 
+    -Creamos la constante blob(nativa) que haga el llamado a la imagen con el id ingresado como parámetro.
+    -Hacemos un if en el caso de que nuestro documento exista:
+        - Si el documento existe tenemos dos posibilidades (if):
+            - NO exista un footer:
+                - Creamos una variable footer que haga el llamado a agregar el footer
+                - Usamos el método de appendIMage en nuestro footer y metemos la constante blob.
+
+            - En el caso de que ya exista uno:
+                - Creamos una variable footer que haga el llamado a traer el footer existente
+                - Usamos el método de appendIMage en nuestro footer y metemos la constante blob.
